@@ -282,8 +282,6 @@ section {
     margin-left: -15px;
 }
 
-.panda-icon {}
-
 .panda-info {
     margin-top: 50px
 }
@@ -404,6 +402,10 @@ section {
     height: 10px;
     border-radius: 50%;
     background: #FFEE2E;
+}
+
+.slider-dot:hover {
+    cursor: pointer;
 }
 
 .slider-donation {
@@ -591,6 +593,11 @@ footer {
 
 .login-in-mail:active {
     border: 1px solid #BDBDBD;
+}
+
+.login-button:active {
+    border: 1px solid #4B9200;
+    color: #4B9200;
 }
 
 .login-button {

@@ -330,6 +330,7 @@
         border: 1px solid rgba(250, 111, 50, 1);
         overflow: hidden;
         transition: all 0.2s ease;
+        background: #F1F3F2;
     }
     
     .gallery-pic-container {
@@ -738,11 +739,11 @@
         margin-right: 5px;
         margin-bottom: 18px;
     }
-    /*     
-    .login-in-mail:active {
-        border: 1px solid #BDBDBD;
+    
+    .login-button:active {
+        border: 1px solid #4B9200;
+        color: #4B9200;
     }
-     */
     
     .login-button {
         width: 129px;
