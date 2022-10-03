@@ -103,6 +103,11 @@ section {
   background: #000000;
   z-index: 30;
 }
+@media screen and (max-width: 640px) {
+  .header {
+    position: fixed;
+  }
+}
 
 .container-header {
   max-width: 1160px;
