@@ -265,18 +265,26 @@ section {
 }
 @media screen and (max-width: 1000px) {
   .bg-section {
+    height: 390px;
     background-image: url(../../../assets/images/desc-small/donate/panda_bg.jpg);
   }
 }
 @media screen and (max-width: 640px) {
   .bg-section {
-    height: 336px;
+    background-size: 100% auto;
+    height: 369px;
     background-image: url(../../../assets/images/tablet/donate/panda_bg.jpg);
   }
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 638px) {
   .bg-section {
-    height: 187px;
+    height: 220px;
+    background-size: cover;
+  }
+}
+@media screen and (max-width: 320px) {
+  .bg-section {
+    background-size: 100% auto;
     background-image: url(../../../assets/images/mob/donate/panda_bg.jpg);
   }
 }
@@ -294,7 +302,7 @@ section {
 }
 @media screen and (max-width: 1200px) {
   .feed-friend-section {
-    height: 1337px;
+    height: 1333px;
   }
 }
 @media screen and (max-width: 900px) {
@@ -351,7 +359,7 @@ section {
   .feed-friend-text h3 {
     font-size: 36px;
     line-height: 130%;
-    margin-bottom: 43px;
+    margin-bottom: 39px;
     margin-right: 121px;
   }
 }
@@ -538,6 +546,7 @@ section {
 }
 @media screen and (max-width: 900px) {
   .pay-container {
+    margin-bottom: 58px;
     margin: 0;
     margin-left: -14px;
   }
@@ -1028,7 +1037,7 @@ footer {
     height: 282px;
   }
 }
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 520px) {
   footer {
     height: 334px;
   }
