@@ -246,14 +246,20 @@ section {
     background-size: cover;
     z-index: -50;
     @media screen and (max-width: 1000px) {
+        height: 390px;
         background-image: url(../../../assets/images/desc-small/donate/panda_bg.jpg);
     }
     @media screen and (max-width: 640px) {
-        height: 336px;
+        background-size: 100% auto;
+        height: 369px;
         background-image: url(../../../assets/images/tablet/donate/panda_bg.jpg);
     }
-    @media screen and (max-width: 600px) {
-        height: 187px;
+    @media screen and (max-width: 638px) {
+        height: 220px;
+        background-size: cover;
+    }
+    @media screen and (max-width: 320px) {
+        background-size: 100% auto;
         background-image: url(../../../assets/images/mob/donate/panda_bg.jpg);
     }
 }
@@ -271,7 +277,7 @@ section {
     align-items: flex-start;
     justify-content: start;
     @media screen and (max-width: 1200px) {
-        height: 1337px;
+        height: 1333px;
     }
     @media screen and (max-width: 900px) {
         height: 1332px;
@@ -316,7 +322,7 @@ section {
     @media screen and (max-width: 1200px) {
         font-size: 36px;
         line-height: 130%;
-        margin-bottom: 43px;
+        margin-bottom: 39px;
         margin-right: 121px;
     }
     @media screen and (max-width: 900px) {
@@ -468,6 +474,7 @@ section {
     margin-bottom: 62px;
     margin-left: -15px;
     @media screen and (max-width: 900px) {
+        margin-bottom: 58px;
         margin: 0;
         margin-left: -14px;
     }
@@ -959,7 +966,7 @@ footer {
     @media screen and (max-width: 640px) {
         height: 282px;
     }
-    @media screen and (max-width: 420px) {
+    @media screen and (max-width: 520px) {
         height: 334px;
     }
 }

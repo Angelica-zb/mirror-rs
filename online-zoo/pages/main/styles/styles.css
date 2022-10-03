@@ -5,6 +5,7 @@ body {
   background: #fff;
   width: 100%;
   overflow-x: hidden;
+  position: relative;
 }
 
 a {
@@ -268,6 +269,7 @@ section {
 @media screen and (max-width: 320px) {
   .favorite-animal-container {
     background-image: url(../../../assets/images/mob/Giant\ Panda.jpg);
+    background-size: auto;
   }
 }
 
@@ -317,7 +319,7 @@ section {
     font-size: 54px;
     line-height: 75%;
     letter-spacing: 1px;
-    margin-top: 50px;
+    margin-top: 85px;
     margin-left: 352px;
   }
 }
@@ -339,6 +341,7 @@ section {
 @media screen and (max-width: 320px) {
   .favorite-animal-text {
     margin-bottom: 43px;
+    margin-top: 75px;
   }
 }
 
