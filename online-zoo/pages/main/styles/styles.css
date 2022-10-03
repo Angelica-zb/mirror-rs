@@ -2217,7 +2217,7 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  margin-bottom: 24px;
+  margin-bottom: 19px;
 }
 @media screen and (max-width: 740px) {
   .designed-container {
