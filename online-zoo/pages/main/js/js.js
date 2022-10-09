@@ -21,11 +21,11 @@ for (let index = 0; index < testimonials.length; index++) {
         bgTestimonial.classList.add('bg-testimonial-active');
         testimonial.classList.add('testimonials-active');
         testim.classList.add('testimonials-mark-active');
+
     });
 }
 
 let cross = document.querySelectorAll('.testimonials-cross-img, .bg-testimonials');
-
 for (let index = 0; index < cross.length; index++) {
     const cros = cross[index];
     const bgTestimonial = document.querySelector('.bg-testimonials');
@@ -41,3 +41,16 @@ for (let index = 0; index < cross.length; index++) {
         }
     });
 }
+
+//скрол отзывов
+const rangeTestimonials = document.querySelector('.range-testimonials');
+const testimonialsСontainer = document.querySelector('.testimonials-container');
+const testimonialsMarkContainer = document.querySelector('.testimonials-mark-container');
+
+rangeTestimonials.addEventListener('input', () => {
+    rangeTestimonials.max = (window.matchMedia('(max-width: 1200px)').matches) ? '8' : '7';
+    let value = rangeTestimonials.value;
+    let offsetL = (testimonialsMarkContainer.offsetWidth + 28) * value;
+    testimonialsСontainer.style.right = offsetL + 'px';
+
+});
