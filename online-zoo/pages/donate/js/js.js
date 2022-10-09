@@ -11,3 +11,36 @@ if (burgerButtons.length > 0) {
         });
     }
 };
+
+//donate
+const anotherAmount = document.querySelector('.another-amount');
+let radioLabel = document.querySelectorAll('.radio-dot')
+let radioSlider = document.querySelectorAll('.radio-slider')
+
+for (let index = 0; index < radioLabel.length; index++) {
+
+    let radio = radioSlider[index]
+    let check = radioLabel[index]
+    check.addEventListener('click', function(e) {
+        // if (radio.checked) {
+
+        anotherAmount.value = radio.value;
+        // }
+    })
+}
+
+anotherAmount.addEventListener('input', () => {
+    var max_chars = 4;
+    if (anotherAmount.value.length > max_chars) {
+        anotherAmount.value = anotherAmount.value.substr(0, max_chars);
+    }
+
+    let val = anotherAmount.value
+    for (let index = 0; index < radioSlider.length; index++) {
+        let radio = radioSlider[index]
+        if (val == radio.value) {
+            radio.checked = true
+        }
+    }
+
+})
