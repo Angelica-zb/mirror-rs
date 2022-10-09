@@ -1680,6 +1680,7 @@ h2,
   align-items: center;
   justify-content: start;
   overflow: hidden;
+  transition: all 0.6s linear;
 }
 @media screen and (max-width: 1200px) {
   .testimonials-section-2 {
@@ -1723,6 +1724,7 @@ h2,
   justify-content: start;
   max-width: 1160px;
   overflow: hidden;
+  transition: all 0.6s linear;
 }
 .testimonials-container {
   position: relative;
@@ -1731,6 +1733,7 @@ h2,
   flex-direction: row;
   align-items: center;
   justify-content: start;
+  transition: all 0.6s linear;
 }
 @media screen and (max-width: 1550px) {
   .testimonials-container {
@@ -2076,6 +2079,7 @@ h2,
 @media screen and (max-width: 760px) and (max-width: 320px) {
   .bg-testimonials {
     height: 460px;
+    top: 25px;
   }
 }
 @media screen and (max-width: 760px) {
@@ -2111,7 +2115,7 @@ h2,
 }
 @media screen and (max-width: 760px) and (max-width: 320px) {
   .testimonials-mark-active {
-    top: 33px;
+    top: -27px;
     left: 17px;
   }
 }
