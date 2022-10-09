@@ -216,6 +216,11 @@ section {
   }
 }
 
+.nav-link-active {
+  color: rgb(249, 128, 75);
+  cursor: default;
+}
+
 @media screen and (max-width: 1200px) {
   .designed {
     margin-right: 30px;
@@ -227,20 +232,133 @@ section {
   }
 }
 
-.burger-icon {
+.burger-button {
   display: none;
 }
 @media screen and (max-width: 640px) {
-  .burger-icon {
+  .burger-button {
     display: block;
     margin-top: -5px;
     cursor: pointer;
   }
 }
 
-.nav-link-active {
-  color: rgb(249, 128, 75);
-  cursor: default;
+.bg-bur {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  z-index: -500;
+  transition: all 1s ease;
+}
+
+.burger-button-bg {
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 100;
+}
+
+.burger-menu {
+  position: relative;
+  display: flex;
+  align-items: normal;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: absolute;
+  width: 100%;
+  height: 329px;
+  top: 0px;
+  right: 100%;
+  z-index: 200;
+  color: black;
+  background-color: #FFFFFF;
+  padding: 0;
+  margin: 0;
+  transition: all 0.3s linear;
+}
+
+.burger-menu.activ {
+  right: 0px;
+}
+
+.bur-head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.bur-logo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 63px;
+  height: 40px;
+  border: 0.950725px solid #FE9013;
+}
+.bur-logo .container-nav-logo {
+  color: rgb(254, 144, 19);
+  width: 92%;
+  margin-bottom: 7px;
+}
+.bur-logo .container-nav-logo .logo {
+  padding: 0;
+  margin: 0;
+  font-weight: 400;
+  font-size: 15.2116px;
+  line-height: 120%;
+  color: rgb(254, 144, 19);
+}
+.bur-logo .bamboo {
+  position: absolute;
+  left: 4px;
+  top: 17px;
+}
+
+.cross {
+  cursor: pointer;
+  margin-top: 0px;
+  margin-right: 5px;
+}
+
+.cross svg {
+  width: 16px;
+  height: 16px;
+  fill: black;
+  fill-opacity: 1;
+}
+
+.burger-nav {
+  list-style: none;
+  text-align: start;
+  margin-left: -30px;
+  margin-top: 21px;
+}
+@media screen and (max-width: 640px) {
+  .burger-nav {
+    margin-top: 17px;
+  }
+}
+
+.burger-nav-item {
+  margin-bottom: 14px;
+}
+
+.burger-nav-link {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  text-decoration: none;
+  color: #333B41;
+}
+
+.burger-nav-link-active {
+  color: #FE9013;
+}
+
+.burger-menu a {
+  text-decoration: none;
 }
 
 /* --------------------section-1----------------- */
@@ -1556,30 +1674,27 @@ h2,
   position: relative;
 }
 
-.testimonials-section {
+.testimonials-section-2 {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: start;
-}
-.testimonials-section h5 {
-  margin-top: 62px;
-  margin-left: 41%;
-  margin-left: 0px;
+  overflow: hidden;
 }
 @media screen and (max-width: 1200px) {
-  .testimonials-section {
+  .testimonials-section-2 {
     align-items: flex-start;
     overflow: hidden;
   }
 }
 
-.testimonials-section h5 {
+.testimonials-section-2 h5 {
+  margin-left: 0;
   margin-top: 140px;
   margin-bottom: 50px;
 }
 @media screen and (max-width: 1200px) {
-  .testimonials-section h5 {
+  .testimonials-section-2 h5 {
     margin-top: 101px;
     margin-bottom: 32px;
     margin-left: auto;
@@ -1587,25 +1702,35 @@ h2,
   }
 }
 @media screen and (max-width: 640px) {
-  .testimonials-section h5 {
+  .testimonials-section-2 h5 {
     margin-top: 62px;
   }
 }
 @media screen and (max-width: 320px) {
-  .testimonials-section h5 {
+  .testimonials-section-2 h5 {
     font-size: 24px;
     margin-top: 34px;
     margin-bottom: 17px;
   }
 }
 
+.testimonials-section {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  max-width: 1160px;
+  overflow: hidden;
+}
 .testimonials-container {
+  position: relative;
   max-width: 1160px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
-  gap: 28px;
+  justify-content: start;
 }
 @media screen and (max-width: 1550px) {
   .testimonials-container {
@@ -1617,7 +1742,6 @@ h2,
     max-width: 945px;
     margin-left: auto;
     margin-right: auto;
-    overflow: hidden;
   }
 }
 @media screen and (max-width: 1000px) {
@@ -1625,17 +1749,18 @@ h2,
     max-width: 940px;
     margin-left: auto;
     margin-right: auto;
-    overflow: hidden;
   }
 }
 @media screen and (max-width: 950px) {
   .testimonials-container {
     gap: 5px;
+    max-width: 755px;
   }
 }
 @media screen and (max-width: 760px) {
   .testimonials-container {
     flex-direction: column;
+    height: 580px;
   }
 }
 @media screen and (max-width: 640px) {
@@ -1651,6 +1776,7 @@ h2,
   height: 388px;
   padding: 2px;
   border-radius: 20px;
+  margin-right: 28px;
 }
 @media screen and (max-width: 1200px) {
   .testimonials-mark-container {
@@ -1660,6 +1786,7 @@ h2,
 }
 @media screen and (max-width: 950px) {
   .testimonials-mark-container {
+    margin-right: 0;
     width: 180px;
     height: 289px;
   }
@@ -1669,6 +1796,15 @@ h2,
     width: 93%;
     height: 107px;
   }
+}
+@media screen and (max-width: 640px) {
+  .testimonials-mark-container {
+    cursor: pointer;
+  }
+}
+
+.margin-slider {
+  margin-right: 0;
 }
 
 .testimonials-mark {
@@ -1917,6 +2053,74 @@ h2,
   }
 }
 
+.bg-testimonials {
+  display: none;
+}
+
+@media screen and (max-width: 760px) {
+  .bg-testimonials {
+    position: absolute;
+    width: 100%;
+    height: 65%;
+    height: 443px;
+    top: 80px;
+    opacity: 0;
+    background: #F5F7F6;
+    z-index: -500;
+    visibility: hidden;
+    flex-direction: row;
+    justify-content: right;
+    align-items: flex-start;
+  }
+}
+@media screen and (max-width: 760px) and (max-width: 320px) {
+  .bg-testimonials {
+    height: 460px;
+  }
+}
+@media screen and (max-width: 760px) {
+  .bg-testimonials .testimonials-cross {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    margin-top: 10px;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+  }
+}
+@media screen and (max-width: 760px) {
+  .bg-testimonial-active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 50;
+    display: flex;
+  }
+}
+@media screen and (max-width: 760px) {
+  .testimonials-mark-active {
+    position: absolute;
+    width: 264px;
+    height: 386px;
+    z-index: 90;
+    top: -30px;
+    left: 32%;
+  }
+}
+@media screen and (max-width: 760px) and (max-width: 320px) {
+  .testimonials-mark-active {
+    top: 33px;
+    left: 17px;
+  }
+}
+@media screen and (max-width: 760px) {
+  .testimonials-active {
+    width: 259px;
+    height: 382px;
+  }
+}
 /* --------------------footer----------------- */
 footer {
   position: relative;
