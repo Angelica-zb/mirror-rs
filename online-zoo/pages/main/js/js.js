@@ -12,6 +12,8 @@ for (let index = 0; index < burgerButtons.length; index++) {
 //Pop-up
 let testimonials = document.querySelectorAll('.testimonials-mark')
 let testims = document.querySelectorAll('.testimonials-mark-container');
+let bgActive = document.querySelector('.testimonials-mark-active');
+
 
 for (let index = 0; index < testimonials.length; index++) {
     const testimonial = testimonials[index];
@@ -22,6 +24,8 @@ for (let index = 0; index < testimonials.length; index++) {
         testimonial.classList.add('testimonials-active');
         testim.classList.add('testimonials-mark-active');
 
+        // let copy = testimonial.importNode(true)
+        // bgActive.appendChild(copy)
     });
 }
 
@@ -46,11 +50,11 @@ for (let index = 0; index < cross.length; index++) {
 const rangeTestimonials = document.querySelector('.range-testimonials');
 const testimonialsСontainer = document.querySelector('.testimonials-container');
 const testimonialsMarkContainer = document.querySelector('.testimonials-mark-container');
-
 rangeTestimonials.addEventListener('input', () => {
-    rangeTestimonials.max = (window.matchMedia('(max-width: 1200px)').matches) ? '8' : '7';
+    rangeTestimonials.max = (window.matchMedia('(max-width: 1200px)').matches) ? '9' : '8';
     let value = rangeTestimonials.value;
-    let offsetL = (testimonialsMarkContainer.offsetWidth + 28) * value;
+    let offsetL = (testimonialsMarkContainer.offsetWidth + 28) * (value - 1);
     testimonialsСontainer.style.right = offsetL + 'px';
-
 });
+
+//

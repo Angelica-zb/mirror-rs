@@ -1420,6 +1420,7 @@ h2,
     align-items: center;
     justify-content: start;
     overflow: hidden;
+    transition: all 0.6s linear;
     @media screen and (max-width: 1200px) {
         align-items: flex-start;
         overflow: hidden;
@@ -1455,6 +1456,7 @@ h2,
     justify-content: start;
     max-width: 1160px;
     overflow: hidden;
+    transition: all 0.6s linear;
     @media screen and (max-width: 999px) {}
 }
 
@@ -1466,6 +1468,7 @@ h2,
     align-items: center;
     justify-content: start;
     // gap: 28px;
+    transition: all 0.6s linear;
     @media screen and (max-width: 1550px) {
         justify-content: start;
     }
@@ -1755,6 +1758,7 @@ h2,
         align-items: flex-start;
         @media screen and (max-width: 320px) {
             height: 460px;
+            top: 25px;
         }
         .testimonials-cross {
             position: absolute;
@@ -1783,7 +1787,7 @@ h2,
         top: -30px;
         left: 32%;
         @media screen and (max-width: 320px) {
-            top: 33px;
+            top: -27px;
             left: 17px;
         }
     }

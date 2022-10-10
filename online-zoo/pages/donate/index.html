@@ -101,7 +101,7 @@
                     </div>
                 </div>
                 <p class="pay-slider-text">Amount</p>
-                <div class="pay-slider-container">
+                <!-- <div class="pay-slider-container">
 
                     <input type="range" min="1" max="8" value="3" class="pay-slider-input">
                     <input type="range" min="1" max="7" value="2" class="pay-slider-input pay-slider-input-2">
@@ -128,25 +128,29 @@
                             <div class="slider-donation">$25</div>
                         </div>
                     </div>
-                </div>
-                <!-- <div class="pay-slider-container">
-                    <div class="radio-slider-container">
-                        <input class="radio-slider radio-slider-1" type="radio" name="s1" id="radio1" value="$5000"> <label for="radio1">$5000</label>
-                        <input class="radio-slider radio-slider-2" type="radio" name="s1" id="radio2" value="$2000"> <label for="radio2">$2000</label>
-                        <input class="radio-slider radio-slider-2" type="radio" name="s1" id="radio3" checked value="$1000"> <label for="radio3">$1000</label>
-                        <input class="radio-slider" type="radio" name="s1" id="radio4" value="$500"> <label for="radio4">$500</label>
-                        <input class="radio-slider" type="radio" name="s1" id="radio5" value="$250"> <label for="radio5">$250</label>
-                        <input class="radio-slider" type="radio" name="s1" id="radio6" value="$100"> <label for="radio6">$100</label>
-                        <input class="radio-slider" type="radio" name="s1" id="radio7" value="$50"> <label for="radio7">$50</label>
-                        <input class="radio-slider" type="radio" name="s1" id="radio8" value="$25"> <label for="radio8">$25</label>
-                    </div>
                 </div> -->
-                <input class="another-amount" type="number" placeholder="Another amount">
-                <div class="radio-pay">
-                    <input class="radio monthly" type="radio" name="r1" id="radio1" value="Monthly"> <label for="radio1">Monthly</label>
-                    <input class="radio once" type="radio" name="r1" id="radio2" checked value="Once"> <label for="radio2">Once</label>
-                </div>
-                <button onclick="location.href='../donate/index.html';">Feed a friend now</button>
+                <form class="form-donate">
+                    <div class="pay-slider-container">
+                        <div class="radio-slider-container">
+
+                            <input class="radio-slider radio-slider-1" type="radio" name="s1" id="radio1" value="5000"> <label class="radio-label radio-label-1" for="radio1">
+                                <div class="radio-dot"></div>$5000</label>
+                            <input class="radio-slider radio-slider-2" type="radio" name="s1" id="radio2" value="2000"> <label class="radio-label radio-label-2" for="radio2"><div class="radio-dot"></div>$2000</label>
+                            <input class="radio-slider radio-slider-2" type="radio" name="s1" id="radio3" value="1000"> <label class="radio-label radio-label-2" for="radio3"><div class="radio-dot"></div>$1000</label>
+                            <input class="radio-slider" type="radio" name="s1" id="radio4" value="500"> <label class="radio-label" for="radio4"><div class="radio-dot"></div>$500</label>
+                            <input class="radio-slider" type="radio" name="s1" id="radio5" value="250"> <label class="radio-label" for="radio5"><div class="radio-dot"></div>$250</label>
+                            <input class="radio-slider" type="radio" checked name="s1" id="radio6" value="100"> <label class="radio-label" for="radio6"><div class="radio-dot"></div>$100</label>
+                            <input class="radio-slider" type="radio" name="s1" id="radio7" value="50"> <label class="radio-label" for="radio7"><div class="radio-dot"></div>$50</label>
+                            <input class="radio-slider" type="radio" name="s1" id="radio8" value="25"> <label class="radio-label" for="radio8"><div class="radio-dot"></div>$25</label>
+                        </div>
+                    </div>
+                    <input class="another-amount" type="number" value="100" placeholder="Another amount" maxlength="4" min="0" max="9999">
+                    <div class="radio-pay">
+                        <input class="radio monthly" type="radio" name="r1" id="radio1" value="Monthly"> <label for="radio1">Monthly</label>
+                        <input class="radio once" type="radio" name="r1" id="radio2" checked value="Once"> <label for="radio2">Once</label>
+                    </div>
+                    <button onclick="location.href='../donate/index.html';">Feed a friend now</button>
+                </form>
                 <p class="share">Share with your friends on social networks </p>
             </div>
         </section>
