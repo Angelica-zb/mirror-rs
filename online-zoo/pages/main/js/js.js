@@ -1,3 +1,4 @@
+alert('Здравстуй, проверяющий, прошу прощения, но работа не готова до конца, проверьте пожалуйста ближе к концу кросс - чека.Задержка произошла по причине болезни.Буду очень благодарна.Хорошего дня');
 //бургер меню
 let burgerButtons = document.querySelectorAll('.burger-button, .cross-bur, .bg-bur');
 for (let index = 0; index < burgerButtons.length; index++) {
