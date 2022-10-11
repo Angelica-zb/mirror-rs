@@ -18,14 +18,10 @@ let radioLabel = document.querySelectorAll('.radio-dot')
 let radioSlider = document.querySelectorAll('.radio-slider')
 
 for (let index = 0; index < radioLabel.length; index++) {
-
     let radio = radioSlider[index]
     let check = radioLabel[index]
     check.addEventListener('click', function(e) {
-        // if (radio.checked) {
-
         anotherAmount.value = radio.value;
-        // }
     })
 }
 
@@ -34,7 +30,6 @@ anotherAmount.addEventListener('input', () => {
     if (anotherAmount.value.length > max_chars) {
         anotherAmount.value = anotherAmount.value.substr(0, max_chars);
     }
-
     let val = anotherAmount.value
     for (let index = 0; index < radioSlider.length; index++) {
         let radio = radioSlider[index]
@@ -42,5 +37,4 @@ anotherAmount.addEventListener('input', () => {
             radio.checked = true
         }
     }
-
 })
