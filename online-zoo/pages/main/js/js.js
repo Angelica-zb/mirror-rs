@@ -190,7 +190,7 @@ let right = document.querySelector('.gallery-arrow-right');
 let left = document.querySelector('.gallery-arrow-left');
 let visible = document.querySelector('.visible');
 right.addEventListener("click", function(e) {
-    gallery.style.transition = 'all 0.6s linear';
+    gallery.style.transition = 'all 0.5s linear';
     let offset = visible.offsetWidth;
     gallery.style.right = offset + 'px';
 
@@ -206,17 +206,17 @@ right.addEventListener("click", function(e) {
         shuffleArr(animals)
         R = animalMix(animals)
         document.querySelector('.right').innerHTML = out(R)
-    }, 1000);
+    }, 500);
 })
 left.addEventListener("click", function(e) {
-    gallery.style.transition = 'all 0.6s linear';
+    gallery.style.transition = 'all 0.5s linear';
     let offset = visible.offsetWidth;
-    gallery.style.left = offset + 'px';
+    gallery.style.right = -offset + 'px';
 
     setTimeout(() => {
         gallery.style.transform = 'none';
         gallery.style.transition = 'none';
-        gallery.style.left = 0 + 'px';
+        gallery.style.right = 0 + 'px';
         document.querySelector('.visible').innerHTML = out(L)
 
         shuffleArr(animals)
@@ -225,7 +225,7 @@ left.addEventListener("click", function(e) {
         shuffleArr(animals)
         R = animalMix(animals)
         document.querySelector('.right').innerHTML = out(R)
-    }, 1000);
+    }, 500);
 })
 
 window.addEventListener("resize", (e) => {
