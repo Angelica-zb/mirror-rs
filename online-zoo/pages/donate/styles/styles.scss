@@ -996,7 +996,7 @@
         }
     }
     
-    .radio-slider:checked~label {
+    .radio-slider:checked+label {
         color: #FE9013;
     }
     
