@@ -202,42 +202,49 @@ let visible = document.querySelector('.visible');
 gallery.style.right = 0 + 'px';
 gallery.style.transform = 'none';
 gallery.style.transition = 'none';
+let Animate = true;
 
 right.addEventListener("click", function(e) {
-    gallery.style.transition = 'all 0.5s linear';
-    let offset = visible.offsetWidth;
-    gallery.style.right = offset + 'px';
+    if (Animate) {
+        gallery.style.transition = 'all 0.7s linear';
+        let offset = visible.offsetWidth;
+        gallery.style.right = offset + 'px';
+        Animate = false;
+        setTimeout(() => {
+            gallery.style.transform = 'none';
+            gallery.style.transition = 'none';
+            gallery.style.right = 0 + 'px';
+            document.querySelector('.visible').innerHTML = out(R)
 
-    setTimeout(() => {
-        gallery.style.transform = 'none';
-        gallery.style.transition = 'none';
-        gallery.style.right = 0 + 'px';
-        document.querySelector('.visible').innerHTML = out(R)
-
-        shuffleArr(animals)
-        L = animalMix(animals)
-        document.querySelector('.left').innerHTML = out(L)
-        shuffleArr(animals)
-        R = animalMix(animals)
-        document.querySelector('.right').innerHTML = out(R)
-    }, 500);
+            shuffleArr(animals)
+            L = animalMix(animals)
+            document.querySelector('.left').innerHTML = out(L)
+            shuffleArr(animals)
+            R = animalMix(animals)
+            document.querySelector('.right').innerHTML = out(R)
+            Animate = true;
+        }, 700);
+    }
 })
 left.addEventListener("click", function(e) {
-    gallery.style.transition = 'all 0.5s linear';
-    let offset = visible.offsetWidth;
-    gallery.style.right = -offset + 'px';
+    if (Animate) {
+        gallery.style.transition = 'all 0.7s linear';
+        let offset = visible.offsetWidth;
+        gallery.style.right = -offset + 'px';
+        Animate = false;
+        setTimeout(() => {
+            gallery.style.transform = 'none';
+            gallery.style.transition = 'none';
+            gallery.style.right = 0 + 'px';
+            document.querySelector('.visible').innerHTML = out(L)
 
-    setTimeout(() => {
-        gallery.style.transform = 'none';
-        gallery.style.transition = 'none';
-        gallery.style.right = 0 + 'px';
-        document.querySelector('.visible').innerHTML = out(L)
-
-        shuffleArr(animals)
-        L = animalMix(animals)
-        document.querySelector('.left').innerHTML = out(L)
-        shuffleArr(animals)
-        R = animalMix(animals)
-        document.querySelector('.right').innerHTML = out(R)
-    }, 500);
+            shuffleArr(animals)
+            L = animalMix(animals)
+            document.querySelector('.left').innerHTML = out(L)
+            shuffleArr(animals)
+            R = animalMix(animals)
+            document.querySelector('.right').innerHTML = out(R)
+            Animate = true;
+        }, 700);
+    }
 })
