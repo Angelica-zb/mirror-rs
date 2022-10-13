@@ -35,6 +35,8 @@ anotherAmount.addEventListener('input', () => {
         let radio = radioSlider[index]
         if (val == radio.value) {
             radio.checked = true
-        }
+        } else {
+            radio.checked = false
+        };
     }
 })
