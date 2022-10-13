@@ -133,7 +133,17 @@ const animals = [{
         'type': 'vegan',
     }
 ]
-
+window.addEventListener("resize", (e) => {
+    countCards = (window.matchMedia('(max-width: 640px)').matches) ? 4 : 6;
+    shuffleArr(animals)
+    let L = animalMix(animals)
+    document.querySelector('.left').innerHTML = out(L)
+    shuffleArr(animals)
+    document.querySelector('.visible').innerHTML = out(animalMix(animals))
+    shuffleArr(animals)
+    let R = animalMix(animals)
+    document.querySelector('.right').innerHTML = out(R)
+});
 let countAnimals = (window.matchMedia('(max-width: 640px)').matches) ? 4 : 6;
 
 let animalMix = (animals) => {
@@ -189,6 +199,10 @@ let gallery = document.querySelector('.gallery-element-all');
 let right = document.querySelector('.gallery-arrow-right');
 let left = document.querySelector('.gallery-arrow-left');
 let visible = document.querySelector('.visible');
+gallery.style.right = 0 + 'px';
+gallery.style.transform = 'none';
+gallery.style.transition = 'none';
+
 right.addEventListener("click", function(e) {
     gallery.style.transition = 'all 0.5s linear';
     let offset = visible.offsetWidth;
@@ -227,15 +241,3 @@ left.addEventListener("click", function(e) {
         document.querySelector('.right').innerHTML = out(R)
     }, 500);
 })
-
-window.addEventListener("resize", (e) => {
-    countCards = (window.matchMedia('(max-width: 640px)').matches) ? 4 : 6;
-    shuffleArr(animals)
-    let L = animalMix(animals)
-    document.querySelector('.left').innerHTML = out(L)
-    shuffleArr(animals)
-    document.querySelector('.visible').innerHTML = out(animalMix(animals))
-    shuffleArr(animals)
-    let R = animalMix(animals)
-    document.querySelector('.right').innerHTML = out(R)
-});
