@@ -245,7 +245,6 @@ shuffle.addEventListener('click', function() {
 })
 
 //change position
-
 field.addEventListener('click', (event) => {
     let emptyButton = +(sizeField * sizeField);
     const buttonField = event.target.closest('button')
@@ -301,6 +300,9 @@ const dragDrop = function() {
     setPositionButtom(matrix, sizeField);
     countMoves++;
     movesContainer.textContent = "Moves: " + countMoves;
+    if (isWin(matrix)) {
+        addWinClass();
+    }
     draggableBut()
 }
 
@@ -325,9 +327,7 @@ function draggableBut() {
             buttonDD.addEventListener('dragend', dragEnd)
         }
     }
-    if (isWin(matrix)) {
-        addWinClass();
-    }
+
 }
 draggableBut()
 
@@ -547,9 +547,7 @@ function sortArr(objArr, propName) {
         }
         return a[1] - b[1];
     }
-
     objArr.sort(comparator);
-
     for (let i = 0; i < objArr.length; ++i)
         objArr[i] = objArr[i][0];
 }
