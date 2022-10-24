@@ -149,10 +149,10 @@ let timer = setInterval(function() {
 
 // sound
 const sounds = [{
-        src: '../sounds/whoosh.mp3',
+        src: './sounds/whoosh.mp3',
     },
     {
-        src: '../sounds/win.mp3',
+        src: './sounds/win.mp3',
     }
 ]
 let isPlay = true;
@@ -408,6 +408,7 @@ buttonUnload.addEventListener('click', function() {
         buttonCountNode[countButtom - 1].innerHTML = ''
         buttonCountNode[countButtom - 1].classList.add("hide2");
         buttonCountNode[countButtom - 1].classList.remove("buttonCount");
+        sizeFrame.value = sizeField
         setPositionButtom(matrix)
         draggableBut()
     }
