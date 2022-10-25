@@ -188,7 +188,7 @@ sizeFrame.addEventListener("click", function(e) {
         shuffleArr(flatMatrix, countButtom)
         matrix = getMatrix(flatMatrix, sizeField)
         setPositionButtom(matrix)
-        countMoves = 0;
+        let countMoves = 0;
         movesContainer.textContent = "Moves: " + countMoves;
         let seconds = ('0' + 0).slice(-2);
         let minutes = ('0').slice(-2);
@@ -207,6 +207,7 @@ function makeField(sizeField) {
         let buttonCount = document.createElement("button");
         buttonCount.classList.add("buttonCount");
         buttonCount.setAttribute("data-matrix-id", `${i+1}`)
+            // buttonCount.setAttribute("draggable", `true`);
         buttonCount.textContent = `${i+1}`;
         field.append(buttonCount);
         buttonCount.style.width = `${(100/sizeField)}%`
@@ -234,7 +235,7 @@ shuffle.addEventListener('click', function() {
     shuffleArr(flatMatrix, countButtom)
     matrix = getMatrix(flatMatrix, sizeField)
     setPositionButtom(matrix)
-    countMoves = 0;
+    let countMoves = 0;
     movesContainer.textContent = "Moves: " + countMoves;
     let seconds = ('0' + 0).slice(-2);
     let minutes = ('0').slice(-2);
@@ -289,8 +290,8 @@ const dragLeave = function() {
 }
 const dragDrop = function() {
     this.classList.remove('hovered')
-    let emptyButton = +(sizeField * sizeField);
     let move = document.querySelector('.hide')
+    let emptyButton = +(sizeField * sizeField);
     const buttonNum = Number(move.dataset.matrixId);
     const buttonXY = findXYbutton(buttonNum, matrix);
     const emptyXY = findXYbutton(emptyButton, matrix);
@@ -303,6 +304,7 @@ const dragDrop = function() {
         addWinClass();
     }
     draggableBut()
+    console.log(1)
 }
 
 function draggableBut() {
