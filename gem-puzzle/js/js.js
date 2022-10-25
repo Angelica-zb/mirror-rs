@@ -188,7 +188,7 @@ sizeFrame.addEventListener("click", function(e) {
         shuffleArr(flatMatrix, countButtom)
         matrix = getMatrix(flatMatrix, sizeField)
         setPositionButtom(matrix)
-        let countMoves = 0;
+        countMoves = 0;
         movesContainer.textContent = "Moves: " + countMoves;
         let seconds = ('0' + 0).slice(-2);
         let minutes = ('0').slice(-2);
@@ -207,7 +207,6 @@ function makeField(sizeField) {
         let buttonCount = document.createElement("button");
         buttonCount.classList.add("buttonCount");
         buttonCount.setAttribute("data-matrix-id", `${i+1}`)
-            // buttonCount.setAttribute("draggable", `true`);
         buttonCount.textContent = `${i+1}`;
         field.append(buttonCount);
         buttonCount.style.width = `${(100/sizeField)}%`
@@ -235,7 +234,7 @@ shuffle.addEventListener('click', function() {
     shuffleArr(flatMatrix, countButtom)
     matrix = getMatrix(flatMatrix, sizeField)
     setPositionButtom(matrix)
-    let countMoves = 0;
+    countMoves = 0;
     movesContainer.textContent = "Moves: " + countMoves;
     let seconds = ('0' + 0).slice(-2);
     let minutes = ('0').slice(-2);

@@ -220,6 +220,7 @@ select {
   opacity: 0;
   cursor: default;
   transition: none;
+  transform: none;
 }
 
 .hide2 {
@@ -227,21 +228,13 @@ select {
   cursor: default;
   outline: none;
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 25%;
-  height: 25%;
-  padding: 0;
-  margin: 0;
   border: none;
-  background: black;
-  color: white;
-  font-size: 2rem;
-  box-shadow: inset 1.5px 1.5px plum;
   transition: transform 0.2s;
 }
 
 .hovered {
   opacity: 0.5;
   background-color: purple;
+  transition: none;
+  transform: none;
 }/*# sourceMappingURL=css.css.map */
