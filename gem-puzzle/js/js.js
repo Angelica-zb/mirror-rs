@@ -188,7 +188,7 @@ sizeFrame.addEventListener("click", function(e) {
         shuffleArr(flatMatrix, countButtom)
         matrix = getMatrix(flatMatrix, sizeField)
         setPositionButtom(matrix)
-        let countMoves = 0;
+        countMoves = 0;
         movesContainer.textContent = "Moves: " + countMoves;
         let seconds = ('0' + 0).slice(-2);
         let minutes = ('0').slice(-2);
@@ -235,7 +235,7 @@ shuffle.addEventListener('click', function() {
     shuffleArr(flatMatrix, countButtom)
     matrix = getMatrix(flatMatrix, sizeField)
     setPositionButtom(matrix)
-    let countMoves = 0;
+    countMoves = 0;
     movesContainer.textContent = "Moves: " + countMoves;
     let seconds = ('0' + 0).slice(-2);
     let minutes = ('0').slice(-2);
