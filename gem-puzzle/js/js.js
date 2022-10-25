@@ -290,8 +290,8 @@ const dragLeave = function() {
 }
 const dragDrop = function() {
     this.classList.remove('hovered')
-    let emptyButton = +(sizeField * sizeField);
     let move = document.querySelector('.hide')
+    let emptyButton = +(sizeField * sizeField);
     const buttonNum = Number(move.dataset.matrixId);
     const buttonXY = findXYbutton(buttonNum, matrix);
     const emptyXY = findXYbutton(emptyButton, matrix);
@@ -304,6 +304,7 @@ const dragDrop = function() {
         addWinClass();
     }
     draggableBut()
+    console.log(1)
 }
 
 function draggableBut() {
