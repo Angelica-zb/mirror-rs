@@ -16,7 +16,7 @@ const nextLevel = document.querySelector('.next-level');
 
 let isPlaySound = true;
 let changeStyle = true;
-let scoreLevel = 7;
+let scoreLevel = 6;
 let scoreCount = 0;
 
 let langSelect = 'ru';
@@ -173,8 +173,6 @@ nextLevel.addEventListener('click', function() {
         optionBtns[i].classList.remove('option-btn-no')
         optionBtns[i].classList.remove('option-btn-yes')
     }
-    let scoreRes = langSelect === 'en' ? `Score: ${scoreCount}` : `Счет: ${scoreCount}`;
-    score.textContent = scoreRes
     changeStyle = true;
 })
 
@@ -307,7 +305,7 @@ setInterval(() => {
         newLeft = rightEdge;
     }
     thumb.style.left = newLeft + 'px';
-    progressBar.style.width = newLeft / parseInt(timeline.offsetWidth) * 100 + "%";
+    progressBar.style.width = (newLeft / parseInt(timeline.offsetWidth) * 100 + 3) + "%";
 }, 20);
 
 function getTimeCodeFromNum(num) {
@@ -561,12 +559,14 @@ for (let i = 0; i < options.length; i++) {
                 playAudioSound(0);
                 optionBtn.classList.add('option-btn-yes')
                 scoreCount = scoreLevel + scoreCount;
-                scoreLevel = 7;
+                scoreLevel = 6;
                 ArrBird = []
                 changeStyle = false;
                 audio.pause();
                 isPlay = false;
                 play.classList.remove('pause');
+                let scoreRes = langSelect === 'en' ? `Score: ${scoreCount}` : `Счет: ${scoreCount}`;
+                score.textContent = scoreRes
             }
             if (i === rightOption && actualTopic === 5) {
                 playAudioSound(3)
@@ -576,7 +576,7 @@ for (let i = 0; i < options.length; i++) {
                 let t = `Ваше колличество баллов: ${scoreCount} `
                 document.querySelector('.final-text').textContent = t;
 
-                if (scoreCount == 36) {
+                if (scoreCount == 30) {
                     playAudioSound(2)
                     tryAgain.classList.add('try-again-hidden');
                     let t = `Вы набрали максимальное колличество баллов`
