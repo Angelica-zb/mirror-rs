@@ -183,13 +183,13 @@ nextLevel.addEventListener('click', function() {
             score.classList.remove('score-start');
             game.classList.remove('game-start');
             document.querySelector('.final-hidden').classList.add('final');
-            let t = `Вы прошли викторину и набрали: ${scoreCount} из 30 возможных баллов`
+            let t = langSelect === 'ru' ? `Вы прошли викторину и набрали: ${scoreCount} из 30 возможных баллов` : `You passed the quiz and scored: ${scoreCount} out of 30 possible points`;
             document.querySelector('.final-text').textContent = t;
 
             if (scoreCount == 30) {
                 playAudioSound(2)
                 tryAgain.classList.add('try-again-hidden');
-                let t = `Вы набрали максимальное колличество баллов`
+                let t = langSelect === 'ru' ? `Вы набрали максимальное колличество баллов` : `You have scored the maximum number of points`;
                 document.querySelector('.final-text').textContent = t;
             }
         }
