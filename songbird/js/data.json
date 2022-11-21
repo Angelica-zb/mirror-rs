@@ -1,82 +1,52 @@
 [{
-        "text": " Programming today is a race of software developers striving to write programs with more and better idiot resistance, and a universe that is trying to create more selective idiots. As long as the universe wins",
-        "author": "Rick Cook"
+        "text": "Birds live all over the planet, on all continents. They even exist in the most inaccessible places in Antarctica."
     },
 
     {
-        "text": "A low-level language is when attention is required to things that have nothing to do with programs in this language",
-        "author": "Alan J. Perlis"
+        "text": "The smallest birds in the world are hummingbirds, individuals of some of their species weigh about 3 grams. The smallest bird in the world is the bee hummingbird, its average body length is about five and a half centimeters."
     },
     {
-        "text": "C programming is like dancing fast on a freshly polished floor of people with sharp razors in their hands",
-        "author": "Waldi Ravens"
-    },
-
-
-    {
-        "text": "In good design, adding something costs less than the thing itself",
-        "author": "Thomas C. Gale"
-    },
-    {
-        "text": "In theory, theory and practice are inseparable. In practice, this is not the case",
-        "author": "Yoggi Berra"
-    },
-    {
-        "text": "Perl is the language that looks the same both before and after RSA encryption",
-        "author": "Keith Bostic"
+        "text": "African ostriches sometimes reach a weight of 150 kg, and some extinct species of flightless birds weighed up to 400 kg. Currently, the largest of all birds on earth is the African ostrich. The growth of these birds reaches 2.7 meters"
     },
 
     {
-        "text": "Sometimes it's better to stay home on Monday than to spend the whole week debugging code written on Monday",
-        "author": "Christopher Thompson"
+        "text": "It is still not known exactly what species of living creatures birds originated from. One of the most popular theories is that dinosaurs"
     },
     {
-        "text": "Measuring a programmer's productivity by counting lines of code is like judging an airplane's build by its weight",
-        "author": "Bill Gates"
+        "text": "All sparrows inhabiting North America are descendants of a pair of these birds released in New York's Central Park in the 19th century."
     },
     {
-        "text": "Debugging code is twice as hard as writing it. So if you write code as smart as you can, then by definition you are not smart enough to debug it",
-        "author": "Brian W Kernighan"
-    },
-    {
-        "text": "Many of you are familiar with the virtues of being a programmer. There are only three of them, and of course this is: laziness, impatience and pride",
-        "author": "Larry Wall"
-    },
-    {
-        "text": "Most programs today are like Egyptian pyramids of a million bricks on top of each other and without constructive integrity - they are simply built by brute force and thousands of slaves",
-        "author": "Alan Kay"
-    },
-    {
-        "text": "Most good programmers do their jobs not because they expect to be paid or recognized, but because they enjoy programming",
-        "author": "Linus Torvalds"
-    },
-    {
-        "text": "Always write code as if it would be accompanied by a violent psychopath who knows where you live",
-        "author": "Martin Golding"
-    },
-    {
-        "text": "Programs must be written for the people who will read them, and the machines that will execute these programs are secondary",
-        "author": "Harold Abelson"
-    },
-    {
-        "text": "People who think they hate computers actually hate bad programmers",
-        "author": "Larry Niven"
+        "text": "Some birds consume a daily amount of food equal to a quarter of their own body weight."
     },
 
     {
-        "text": "A language that doesn 't change your understanding of programming is not worth learning",
-        "author": "Alan J.Perlis"
+        "text": "Only birds have feathers, none of the other modern animals have them."
     },
     {
-        "text": "We are seeing a society that is increasingly dependent on machines, but at the same time uses them more and more inefficiently",
-        "author": "Douglas Rushkoff"
+        "text": "Birds do not have one larynx, but two"
     },
     {
-        "text": "Sometimes the best programs are written on paper. Programming them is a secondary thing",
-        "author": "Max Kanat-Alexander"
+        "text": "Seabirds can drink salty sea water"
     },
     {
-        "text": "Debugging code is like hunting. Hunting for bugs",
-        "author": "Amit Kalantri"
+        "text": "The New Caledonian Raven is one of the most intelligent birds. He knows how to make tools from improvised plant materials that help him get food - for example, hooked tools with which he extracts insects from under tree bark."
+    },
+    {
+        "text": "Owls fly silently thanks to their feathers."
+    },
+    {
+        "text": "Ducks and geese would be able to withstand colds up to a hundred degrees below zero, if such frosts ever occurred on Earth."
+    },
+    {
+        "text": "The lyrebird bird living in Australia has an extremely complex vocal apparatus. These creatures can imitate any sound, up to the howl of a chainsaw, human crying or the sound of a car engine."
+    },
+    {
+        "text": "The only bird capable of flying backwards is the hummingbird."
+    },
+    {
+        "text": "The first bird ever domesticated by man is the goose"
+    },
+    {
+        "text": "Nearly two-thirds of all bird species live in tropical rainforests."
     }
 ]

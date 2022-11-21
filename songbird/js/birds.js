@@ -1,4 +1,4 @@
-const birdsData = [
+export const birdsData = [
     [{
             id: 1,
             name: 'Ворон',
@@ -273,7 +273,7 @@ const birdsData = [
             name: 'Пеликан',
             species: 'Pelecanus',
             description: 'Пеликаны — обитатели морей и рек. Ходят они неуклюже, но хорошо летают и плавают. Питаются в основном рыбой, устраивают коллективные охоты — выстроившись полукругом хлопают по воде крыльями и клювами и вытесняют напуганную рыбу на мелководье.',
-            image: 'https://live.staticflickr.com/65535/49159147156_dcbbb5c12a.jpg',
+            image: "https://upload.wikimedia.org/wikipedia/commons/b/ba/American_White_Pelican%2C_non-breeding_adult_%2838164183581%29.jpg",
             audio: 'https://www.xeno-canto.org/sounds/uploaded/XAMHIHFTZG/XC331138-call1.mp3'
         },
         {
@@ -291,8 +291,8 @@ const birdsData = [
             description: 'Чайки населяют берега морей, озёр, рек, водохранилищ, болот, часто гнездятся на островах. С конца прошлого века чайки стали появляться в крупных городах, где устраивает гнёзда на крышах зданий. Все чайки ведут колониальный образ жизни.',
             image: 'https://live.staticflickr.com/65535/48577115317_7034201dde.jpg',
             audio: 'https://www.xeno-canto.org/sounds/uploaded/VOLIQOYWKG/XC501190-190801_06.50h_zilvermeeuw_duinen%20van%20goeree_roep_2ex_overvliegend_gezien_.mp3'
-        }
-    ]
-];
+        },
+    ],
+]
 
-export default birdsData;
+// export default birdsData;

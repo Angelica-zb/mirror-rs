@@ -1,14 +1,85 @@
+import { birdsData } from './birds.js';
+import { birdsDataEn } from './birdsEn.js';
+
+const playGame = document.querySelector('.bird-animation');
+const tryAgain = document.querySelector('.try-again');
+const quotes = document.querySelector('.quotes');
+const game = document.querySelector('.game');
+const score = document.querySelector('.score');
+const chooseLang = document.querySelector('.choose-lang');
+const birdGalery = document.querySelector('.bird-gallery');
+let optionBtns = document.querySelectorAll('.option-btn')
+const quote = document.querySelector('.quote');
+const butQuote = document.querySelector('.change-quote');
+const gallery = document.querySelector('.bird-gallery-btn');
+const nextLevel = document.querySelector('.next-level');
+
+let isPlaySound = true;
+let changeStyle = true;
+let scoreLevel = 7;
+let scoreCount = 0;
+
 let langSelect = 'ru';
+let actualTopic = 0;
+let rightOption = 0;
+const ru = document.querySelector('.ru');
+const en = document.querySelector('.en');
 
+let topicTitleRu = ['Разминка', 'Воробьиные', 'Лесные птицы', 'Певчье птицы', 'Хищные птицы', 'Морские птицы'];
+let topicTitleEn = ['Warm-up', 'Passerines', 'Forest birds', 'Songbirds', 'Birds of prey', 'Sea birds'];
 
+ru.addEventListener('click', function() {
+    langSelect = 'ru';
+    changeQuotes()
+    makeTransl()
+})
 
+en.addEventListener('click', function() {
+    langSelect = 'en';
+    changeQuotes()
+    makeTransl()
+})
 
+function setLocalStorage() {
+    localStorage.setItem('language-az', langSelect);
+}
+window.addEventListener('beforeunload', setLocalStorage)
+
+function getLocalStorage() {
+    if (localStorage.getItem('language-az')) {
+        langSelect = localStorage.getItem('language-az');
+    } else {
+        langSelect = 'ru';
+    }
+}
+
+window.addEventListener('load', getLocalStorage)
+window.addEventListener('load', changeQuotes)
+window.addEventListener('load', makeTransl)
+
+makeTopic()
+
+function makeTransl() {
+    makeTopic()
+    if (langSelect === 'en') {
+        gallery.textContent = 'Gallery';
+        document.querySelector('.logo-play').textContent = 'Play';
+        tryAgain.textContent = 'Try again';
+        document.querySelector('.about-option-start').textContent = 'Listen to the player. Select a bird from the list';
+        document.querySelector('.choose-lang-p').textContent = 'Choose language:';
+        nextLevel.textContent = 'Next level';
+    } else {
+        gallery.textContent = 'Галерея';
+        document.querySelector('.logo-play').textContent = 'Играть';
+        tryAgain.textContent = 'Пробовать снова';
+        document.querySelector('.about-option-start').textContent = 'Послушайте плеер. Выберите птицу из списка';
+        document.querySelector('.choose-lang-p').textContent = 'Выберите язык:';
+        nextLevel.textContent = 'Следующий уровень';
+    }
+}
 
 
 //--------------------------Quotes
-const quote = document.querySelector('.quote');
-const author = document.querySelector('.author');
-const butQuote = document.querySelector('.change-quote');
 async function changeQuotes() {
     const quotes = langSelect === 'en' ? './js/data.json' : './js/dataRu.json';
     const res = await fetch(quotes);
@@ -23,241 +94,698 @@ async function changeQuotes() {
         quote.textContent = `"${data[n].text}."`
     }
 }
-changeQuotes()
+
 butQuote.addEventListener('click', changeQuotes);
 
 //play
-const play = document.querySelector('.bird-animation');
-const quotes = document.querySelector('.quotes');
-const game = document.querySelector('.game');
-const score = document.querySelector('.score');
-play.addEventListener('click', function() {
-    quotes.classList.add('quotes-hover');
+playGame.addEventListener('click', function() {
+    document.querySelector('.gallery').classList.add('gallery-hidden');
+    document.querySelector('.final-hidden').classList.remove('final');
+    quotes.classList.add('quotes-hidden');
     game.classList.add('game-start');
-    play.classList.add('bird-animation-hover');
+    playGame.classList.add('bird-animation-hidden');
     score.classList.add('score-start');
+    chooseLang.classList.add('choose-lang-hidden');
+    birdGalery.classList.add('bird-gallery-hidden');
+    rightOption = getRandomNum(0, 5)
+    audio.src = birdsData[actualTopic][rightOption].audio;
+    lengthSong.textContent = getTimeCodeFromNum(audio.duration);
+    getlengthSong()
+    getlengthSongOption()
+    getOption()
+    stopAudioGalery()
+    scoreCount = 0;
+    let scoreRes = langSelect === 'en' ? `Score: ${scoreCount}` : `Счет: ${scoreCount}`;
+    score.textContent = scoreRes
+    changeStyle = true;
+});
+
+tryAgain.addEventListener('click', function() {
+    document.querySelector('.final-hidden').classList.remove('final');
+    game.classList.add('game-start');
+    score.classList.add('score-start');
+    actualTopic = 0;
+    rightOption = getRandomNum(0, 5)
+    audio.src = birdsData[actualTopic][rightOption].audio;
+    lengthSong.textContent = getTimeCodeFromNum(audio.duration);
+    getlengthSong()
+    getlengthSongOption()
+    getOption()
+    makeTopic()
+    document.querySelector('.about-option-start').classList.remove('about-option-start-hidden')
+    document.querySelector('.about-option').classList.add('about-option-hidden')
+    makeTopic()
+    document.querySelector('.correct-title').textContent = '******';
+    document.querySelector('.correct-img').style.backgroundImage = 'url(./assets/img/bird.06a46938.jpg)';
+    play.classList.remove('pause');
+    isPlay = false;
+    stopAudioOption();
+    for (let i = 0; i < optionBtns.length; i++) {
+        optionBtns[i].classList.remove('option-btn-no')
+        optionBtns[i].classList.remove('option-btn-yes')
+    }
+    scoreCount = 0;
+    let scoreRes = langSelect === 'en' ? `Score: ${scoreCount}` : `Счет: ${scoreCount}`;
+    score.textContent = scoreRes
+    changeStyle = true;
+    nextLevel.classList.remove('next-level-active')
+    nextLevel.disabled = true;
+})
+
+
+//next level
+
+nextLevel.addEventListener('click', function() {
+    nextLevel.classList.remove('next-level-active')
+    nextLevel.disabled = true;
+    actualTopic++;
+    rightOption = getRandomNum(0, 5)
+    getlengthSong()
+    getlengthSongOption()
+    getOption()
+    document.querySelector('.about-option-start').classList.remove('about-option-start-hidden')
+    document.querySelector('.about-option').classList.add('about-option-hidden')
+    makeTopic()
+    document.querySelector('.correct-title').textContent = '******';
+    document.querySelector('.correct-img').style.backgroundImage = 'url(./assets/img/bird.06a46938.jpg)';
+    play.classList.remove('pause');
+    isPlay = false;
+    stopAudioOption();
+    for (let i = 0; i < optionBtns.length; i++) {
+        optionBtns[i].classList.remove('option-btn-no')
+        optionBtns[i].classList.remove('option-btn-yes')
+    }
+    let scoreRes = langSelect === 'en' ? `Score: ${scoreCount}` : `Счет: ${scoreCount}`;
+    score.textContent = scoreRes
+    changeStyle = true;
+})
+
+//topic
+function makeTopic() {
+    let topicWr = langSelect === 'en' ? topicTitleEn : topicTitleRu;
+    let topic = document.querySelectorAll('.topic');
+    for (let i = 0; i < topic.length; i++) {
+        topic[i].textContent = topicWr[i]
+        topic[i].classList.remove('topic-active')
+        topic[actualTopic].classList.add('topic-active')
+    }
+}
+
+//------------------player
+const play = document.querySelector('.play');
+const current = document.querySelector('.current');
+const lengthSong = document.querySelector('.length-song');
+
+let isPlay = false;
+
+const audio = new Audio();
+
+function getlengthSong() {
+    audio.src = birdsData[actualTopic][rightOption].audio;
+    audio.addEventListener('canplay', () => {
+        lengthSong.textContent = getTimeCodeFromNum(audio.duration);
+    })
+}
+
+function playAudio() {
+    let currentSong = audio.currentTime;
+    audio.src = birdsData[actualTopic][rightOption].audio;
+    if (!isPlay) {
+        audio.currentTime = currentSong;
+        audio.play();
+        isPlay = true;
+        stopAudioOption()
+    } else {
+        audio.currentTime = currentSong;
+        audio.pause();
+        isPlay = false;
+    }
+    audio.addEventListener('ended', function() {
+        pauseAudio()
+        isPlay = false;
+        currentSong = audio.currentTime;
+        audio.currentTime = 0
+    });
+}
+
+function pauseAudio() {
+    play.classList.toggle('pause');
+}
+
+play.addEventListener('click', function(p) {
+    playAudio()
+    pauseAudio();
 })
 
 
 
+//timeline
+const timeline = document.querySelector(".timeline");
+const thumb = timeline.querySelector('.thumb');
+const progressBar = document.querySelector(".progress");
+
+thumb.onmousedown = function(event) {
+    event.preventDefault();
+    let shiftX = event.clientX - thumb.getBoundingClientRect().left;
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+
+    function onMouseMove(event) {
+        let newLeft = event.clientX - shiftX - timeline.getBoundingClientRect().left;
+        if (newLeft < 0) {
+            newLeft = 0;
+        }
+        let rightEdge = timeline.offsetWidth;
+        if (newLeft > rightEdge) {
+            newLeft = rightEdge;
+        }
+        thumb.style.left = newLeft + 'px';
+        progressBar.style.width = newLeft / parseInt(timeline.offsetWidth) * 100 + "%";
+        audio.currentTime = audio.duration * (newLeft / parseInt(timeline.offsetWidth))
+        current.textContent = getTimeCodeFromNum(audio.currentTime);
+    }
+
+    function onMouseUp() {
+        // setTimeout(() => {
+        document.removeEventListener('mouseup', onMouseUp);
+        document.removeEventListener('mousemove', onMouseMove);
+        // }, 0)
+        current.textContent = getTimeCodeFromNum(audio.currentTime);
+    }
+    audio.addEventListener('ended', function() {
+        audio.currentTime = 0
+        progressBar.style.width = 0 + "%";
+        thumb.style.left = 0 + 'px';
+        current.textContent = getTimeCodeFromNum(audio.currentTime);
+        play.classList.remove('pause');
+    });
 
 
+};
 
-
-// window.addEventListener('beforeunload', function() {
-//     let stage = [];
-//     let difficulty = '';
-//     localStorage.setItem('difficulty', JSON.stringify(difficulty));
-//     localStorage.setItem('stage', JSON.stringify(stage));
-//     localStorage.setItem('stageRes', JSON.stringify(stage));
-// })
-// import { blueCardsData } from './data/mythicCards/blue/index.js';
-// import { brownCardsData } from './data/mythicCards/brown/index.js';
-// import { greenCardsData } from './data/mythicCards/green/index.js';
-// import { ancientsData } from './data/ancients.js';
-// import { difficulties } from './data/difficulties.js';
-
-
-
-// //---------------------ancientCard
-// let ancientCards = document.querySelectorAll(".ancient-card");
-// for (let i = 0; i < ancientCards.length; i++) {
-//     let ancientCard = ancientCards[i];
-//     ancientCard.addEventListener("click", function(e) {
-//         shuffle.classList.remove('none')
-//         deckContainer.classList.add('none')
-//         for (let k = 0; k < ancientCards.length; k++) {
-//             let rem = ancientCards[k]
-//             rem.classList.remove("active")
-//         }
-//         ancientCard.classList.add("active")
-//         let stage = ancientsData[i]
-//         localStorage.setItem('stage', JSON.stringify(stage));
-//         localStorage.setItem('stageRes', JSON.stringify(stage));
-//     });
-// }
-
-// //------------------------difficulty
-// let difficultyAll = document.querySelectorAll(".difficulty");
-// for (let i = 0; i < difficultyAll.length; i++) {
-//     let difficulty = difficultyAll[i];
-//     difficulty.addEventListener("click", function(e) {
-//         shuffle.classList.remove('none')
-//         deckContainer.classList.add('none')
-//         for (let k = 0; k < difficultyAll.length; k++) {
-//             difficultyAll[k].classList.remove("active")
-//         }
-//         difficulty.classList.add("active")
-//         let difficultyChoose = difficulties[i]
-//         localStorage.setItem('difficulty', JSON.stringify(difficultyChoose));
-//     });
-// }
-
-// //------------------------shuffle
-// let shuffle = document.querySelector(".shuffle-button");
-// let deckContainer = document.querySelector(".deck-container");
-
-// shuffle.addEventListener("click", function(e) {
-//     let choose = JSON.parse(localStorage.getItem('stageRes'));
-//     let difficulty = JSON.parse(localStorage.getItem('difficulty'));
-//     if (choose.length != 0 && difficulty != '') {
-//         localStorage.setItem('stage', JSON.stringify(choose));
-//         shuffle.classList.add('none')
-//         deckContainer.classList.remove('none')
-//         document.querySelector('.deck').style.backgroundImage = `url(./assets/mythicCardBackground.png)`;
-//         document.querySelector('.last-card').style.backgroundImage = `url()`;
-//         out(choose)
-//         localStorage.setItem('deckGreen', JSON.stringify(greenCardsData));
-//         localStorage.setItem('deckBrown', JSON.stringify(brownCardsData));
-//         localStorage.setItem('deckBlue', JSON.stringify(blueCardsData));
-//         let difficulties = JSON.parse(localStorage.getItem('difficulty'));
-//         sortCardColl(difficulties, 'blue')
-//         sortCardColl(difficulties, 'brown')
-//         sortCardColl(difficulties, 'green')
-//         let deckFin = []
-//         deckFin = deckFin.concat(makeStage(choose, 'thirdStage'))
-//         deckFin = deckFin.concat(makeStage(choose, 'secondStage'))
-//         deckFin = deckFin.concat(makeStage(choose, 'firstStage'))
-//         localStorage.setItem('deckFin', JSON.stringify(deckFin));
-//         console.log(`Колода карт:`)
-//         console.log(deckFin)
-//     } else {
-//         alert('Не выбран уровень сложности или карта древнего')
+// timeline.addEventListener("mousedown", event => {
+//     const timelineWidth = window.getComputedStyle(timeline).width;
+//     const timeToSeek = event.offsetX / parseInt(timelineWidth) * audio.duration;
+//     let newLeft = (timeToSeek * parseInt(timelineWidth)) / audio.duration
+//     if (newLeft < 0) {
+//         newLeft = 0;
 //     }
-// })
-
-// function out(choose) {
-//     let out = '';
-//     out +=
-//         `<div class="stage-container">
-//         <span class="stage-text">Первая стадия</span>
-//         <div class="dots-container">
-//             <div class="dot green">${choose.firstStage.greenCards}</div>
-//             <div class="dot brown">${choose.firstStage.brownCards}</div>
-//             <div class="dot blue">${choose.firstStage.blueCards}</div>
-//         </div>
-//     </div>
-//     <div class="stage-container">
-//         <span class="stage-text">Вторая стадия</span>
-//         <div class="dots-container">
-//             <div class="dot green">${choose.secondStage.greenCards}</div>
-//             <div class="dot brown">${choose.secondStage.brownCards}</div>
-//             <div class="dot blue">${choose.secondStage.blueCards}</div>
-//         </div>
-//     </div>
-//     <div class="stage-container">
-//         <span class="stage-text">Третья стадия</span>
-//         <div class="dots-container">
-//             <div class="dot green">${choose.thirdStage.greenCards}</div>
-//             <div class="dot brown">${choose.thirdStage.brownCards}</div>
-//             <div class="dot blue">${choose.thirdStage.blueCards}</div>
-//         </div>
-//     </div>`
-//     document.querySelector('.current-state').innerHTML = out;
-// }
-
-// function makeStage(choose, st) {
-//     let deckStage = []
-//     let blueN = +choose[st].blueCards
-//     deckStage = deckStage.concat(colorCards(blueN, 'blue'))
-//     let brownN = +choose[st].brownCards
-//     deckStage = deckStage.concat(colorCards(brownN, 'brown'))
-//     let greenN = +choose[st].greenCards
-//     deckStage = deckStage.concat(colorCards(greenN, 'green'))
-//     shuffleArr(deckStage)
-//     return deckStage
-// }
-
-// function colorCards(colorNum, color) {
-//     let deck = []
-//     let deckCol = JSON.parse(localStorage.getItem(`deck${color[0].toUpperCase() + color.slice(1)}`));
-//     shuffleArr(deckCol)
-//     while (colorNum > 0) {
-//         deck.push(deckCol[0])
-//         deckCol.shift()
-//         colorNum--
-//         localStorage.setItem(`deck${color[0].toUpperCase() + color.slice(1)}`, JSON.stringify(deckCol));
+//     let rightEdge = timeline.offsetWidth;
+//     if (newLeft > rightEdge) {
+//         newLeft = rightEdge ;
 //     }
-//     return deck
-// }
+//     audio.currentTime = timeToSeek
+//     current.textContent = getTimeCodeFromNum(audio.currentTime);
+//     thumb.style.left = newLeft + 'px';
+//     progressBar.style.width = newLeft / parseInt(timelineWidth) * 100 + "%";
+// });
 
-// function shuffleArr(array) {
-//     for (let i = array.length - 1; i > 0; i--) {
-//         let j = Math.floor(Math.random() * (i + 1));
-//         [array[i], array[j]] = [array[j], array[i]];
-//     }
-// }
+thumb.ondragstart = function() {
+    return false;
+};
 
-// //-------------------stack
-// let deck = document.querySelector(".deck");
+setInterval(() => {
+    current.textContent = getTimeCodeFromNum(audio.currentTime);
+    let newLeft = (audio.currentTime * parseInt(timeline.offsetWidth)) / audio.duration
+    if (newLeft < 0) {
+        newLeft = 0;
+    }
+    let rightEdge = timeline.offsetWidth;
+    if (newLeft > rightEdge) {
+        newLeft = rightEdge;
+    }
+    thumb.style.left = newLeft + 'px';
+    progressBar.style.width = newLeft / parseInt(timeline.offsetWidth) * 100 + "%";
+}, 20);
 
-// deck.addEventListener("click", function(e) {
-//     let stack = JSON.parse(localStorage.getItem('deckFin'));
-//     if (stack.length == 1) {
-//         document.querySelector('.deck').style.backgroundImage = `url()`;
-//     }
-//     let lastCard = stack.pop();
-//     outCard(lastCard)
-//     stageCard(lastCard)
-//     localStorage.setItem('deckFin', JSON.stringify(stack));
-// })
+function getTimeCodeFromNum(num) {
+    let seconds = parseInt(num);
+    let minutes = parseInt(seconds / 60);
+    seconds -= minutes * 60;
+    const hours = parseInt(minutes / 60);
+    minutes -= hours * 60;
+    if (hours === 0) return `${minutes}:${String(seconds % 60).padStart(2, 0)}`;
+    return `${String(hours).padStart(2, 0)}:${minutes}:${String(seconds % 60).padStart(2, 0)}`;
+}
 
-// function outCard(lastCard) {
-//     let stack = JSON.parse(localStorage.getItem('deckFin'));
-//     if (stack.length > 0) {
-//         let n = `./assets/MythicCards/${lastCard.color}/${lastCard.id}.png`
-//         document.querySelector('.last-card').style.backgroundImage = `url(${n})`;
-//     }
-// }
+//volume
+document.querySelector(".volume-percentage").style.width = '75%';
+const volumeSlider = document.querySelector(".volume-slider");
+volumeSlider.addEventListener('click', e => {
+    const sliderWidth = window.getComputedStyle(volumeSlider).width;
+    const newVolume = e.offsetX / parseInt(sliderWidth);
+    audio.volume = newVolume;
+    document.querySelector(".volume-percentage").style.width = newVolume * 100 + '%';
+})
 
-// //-----------------------------stage
-// function stageCard(lastCard) {
-//     let choose = JSON.parse(localStorage.getItem('stage'));
-//     let stack = JSON.parse(localStorage.getItem('deckFin'));
-//     if (stack.length > 0) {
-//         let FrSecNum = choose.secondStage.greenCards + choose.secondStage.blueCards + choose.secondStage.brownCards;
-//         let FrThNum = choose.thirdStage.greenCards + choose.thirdStage.blueCards + choose.thirdStage.brownCards;
-//         let color = lastCard.color
-//         if (FrThNum >= stack.length > 0) {
-//             stageCardChange(choose, 'thirdStage', color)
-//         } else if (stack.length > (FrThNum + FrSecNum)) {
-//             stageCardChange(choose, 'firstStage', color)
-//         } else if ((FrThNum + FrSecNum) >= stack.length && stack.length > FrThNum) {
-//             stageCardChange(choose, 'secondStage', color)
-//         }
-//     }
-// }
+document.querySelector(".volume-button").addEventListener("click", () => {
+    const volumeEl = document.querySelector(".volume-button");
+    audio.muted = !audio.muted;
+    if (audio.muted) {
+        volumeEl.style.opacity = 0.4;
+    } else {
+        volumeEl.style.opacity = 1;
+    }
+});
 
-// function stageCardChange(choose, stage, n) {
-//     let l = `${n}Cards`
-//     choose[stage][l]--;
-//     localStorage.setItem('stage', JSON.stringify(choose));
-//     out(choose)
-// }
+//options
+let optionVar = document.querySelectorAll('.option-var')
 
-// //--------------------difficulty
-// function sortCardColl(difficulties, color) {
-//     let choose = JSON.parse(localStorage.getItem('stageRes'));
-//     let deckCol = JSON.parse(localStorage.getItem(`deck${color[0].toUpperCase() + color.slice(1)}`));;
-//     let deckColChan = sortCard(deckCol, difficulties.diffDel, difficulties.diffDel2)
-//     let l = `${color}Cards`
-//     let numCol = choose.firstStage[l] + choose.secondStage[l] + choose.thirdStage[l]
-//     let r = numCol - deckColChan.length
-//     let deckCo = sortCard(deckCol, 'hard', 'easy')
-//     while (r > 0) {
-//         deckCo.shift();
-//         deckColChan.push(deckCo[0]);
-//         r--;
-//     }
-//     localStorage.setItem(`deck${color[0].toUpperCase() + color.slice(1)}`, JSON.stringify(deckColChan));
-// }
+function getOption() {
+    const birdsD = langSelect === 'en' ? birdsDataEn : birdsData;
+    for (let i = 0; i < optionVar.length; i++) {
+        let opt = optionVar[i];
+        opt.textContent == ''
+        opt.textContent = birdsD[actualTopic][i].name;
+    }
+}
 
-// function sortCard(deckCol, difficulty1, difficulty2) {
-//     let deckColChan = []
-//     for (let i = 0; i < deckCol.length; i++) {
-//         if (deckCol[i].difficulty != difficulty1 && deckCol[i].difficulty != difficulty2) {
-//             deckColChan.push(deckCol[i])
-//         } else { deckColChan }
-//     }
-//     return deckColChan
-// }
+//get options
+const answerOptions = document.querySelector('.answer-options')
+answerOptions.addEventListener("click", () => {
+    document.querySelector('.about-option-start').classList.add('about-option-start-hidden')
+    document.querySelector('.about-option').classList.remove('about-option-hidden')
+})
+
+
+
+//------------------player-variants
+const audioOption = new Audio();
+const playOption = document.querySelector('.play-option');
+const currentOption = document.querySelector('.current-option');
+const lengthSongOption = document.querySelector('.length-song-option');
+
+let isPlayOption = false;
+
+function getlengthSongOption() {
+    audioOption.src = birdsData[actualTopic][k].audio;
+    audioOption.addEventListener('canplay', () => {
+        lengthSongOption.textContent = getTimeCodeFromNum(audioOption.duration);
+    })
+}
+
+function playAudioOption(k) {
+    let currentSong = audioOption.currentTime;
+    audioOption.src = birdsData[actualTopic][k].audio;
+    if (!isPlayOption) {
+        audio.pause();
+        play.classList.remove('pause');
+        isPlay = false;
+        audioOption.currentTime = currentSong;
+        audioOption.play();
+        isPlayOption = true;
+    } else {
+        audioOption.currentTime = currentSong;
+        audioOption.pause();
+        isPlayOption = false;
+    }
+    audioOption.addEventListener('ended', function() {
+        stopAudioOption();
+        currentSong = audioOption.currentTime;
+    });
+}
+
+function stopAudioOption() {
+    playOption.classList.remove('pause-option');
+    audioOption.pause();
+    isPlayOption = false;
+    audioOption.currentTime = 0
+}
+
+function pauseAudioOption() {
+    playOption.classList.toggle('pause-option');
+}
+
+playOption.addEventListener('click', function(p) {
+    playAudioOption(k)
+    pauseAudioOption();
+
+})
+
+//timeline
+const timelineOption = document.querySelector(".timeline-option");
+const thumbOption = timelineOption.querySelector('.thumb-option');
+const progressBarOption = document.querySelector(".progress-option");
+
+thumbOption.onmousedown = function(event) {
+    event.preventDefault();
+    let shiftX = event.clientX - thumbOption.getBoundingClientRect().left;
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+
+    function onMouseMove(event) {
+        let newLeft = event.clientX - shiftX - timelineOption.getBoundingClientRect().left;
+        if (newLeft < 0) {
+            newLeft = 0;
+        }
+        let rightEdge = timelineOption.offsetWidth;
+        if (newLeft > rightEdge) {
+            newLeft = rightEdge;
+        }
+        thumbOption.style.left = newLeft + 'px';
+        progressBarOption.style.width = newLeft / parseInt(timelineOption.offsetWidth) * 100 + "%";
+        audioOption.currentTime = audioOption.duration * (newLeft / parseInt(timelineOption.offsetWidth))
+        current.textContent = getTimeCodeFromNum(audioOption.currentTime);
+    }
+
+    function onMouseUp() {
+        // setTimeout(() => {
+        document.removeEventListener('mouseup', onMouseUp);
+        document.removeEventListener('mousemove', onMouseMove);
+        // }, 0)
+        current.textContent = getTimeCodeFromNum(audioOption.currentTime);
+    }
+    audioOption.addEventListener('ended', function() {
+        audioOption.currentTime = 0
+        progressBarOption.style.width = 0 + "%";
+        thumbOption.style.left = 0 + 'px';
+        currentOption.textContent = getTimeCodeFromNum(audioOption.currentTime);
+        playOption.classList.remove('pause');
+    });
+
+
+};
+
+thumbOption.ondragstart = function() {
+    return false;
+};
+
+setInterval(() => {
+    currentOption.textContent = getTimeCodeFromNum(audioOption.currentTime);
+    let newLeft = (audioOption.currentTime * parseInt(timelineOption.offsetWidth)) / audioOption.duration
+    if (newLeft < 0) {
+        newLeft = 0;
+    }
+    let rightEdge = timelineOption.offsetWidth;
+    if (newLeft > rightEdge) {
+        newLeft = rightEdge;
+    }
+    thumbOption.style.left = newLeft + 'px';
+    progressBarOption.style.width = newLeft / parseInt(timelineOption.offsetWidth) * 100 + "%";
+}, 20);
+
+//volume
+document.querySelector(".volume-percentage-option").style.width = '75%';
+const volumeSliderOption = document.querySelector(".volume-slider-option");
+volumeSliderOption.addEventListener('click', e => {
+    const sliderWidth = window.getComputedStyle(volumeSliderOption).width;
+    const newVolume = e.offsetX / parseInt(sliderWidth);
+    audioOption.volume = newVolume;
+    document.querySelector(".volume-percentage-option").style.width = newVolume * 100 + '%';
+})
+
+document.querySelector(".volume-button-option").addEventListener("click", () => {
+    const volumeElOption = document.querySelector(".volume-button-option");
+    audioOption.muted = !audioOption.muted;
+    if (audioOption.muted) {
+        volumeElOption.style.opacity = 0.4;
+    } else {
+        volumeElOption.style.opacity = 1;
+    }
+});
+
+// sound
+const sounds = [{
+        src: './assets/mp3/yes.mp3',
+    },
+    {
+        src: './assets/mp3/no.mp3',
+    },
+    {
+        src: './assets/mp3/win.mp3',
+    },
+    {
+        src: './assets/mp3/again.mp3',
+    }
+]
+
+const audioSound = new Audio();
+
+function playAudioSound(sound) {
+    if (isPlaySound) {
+        audioSound.src = sounds[sound].src;
+        audioSound.play();
+    }
+}
+
+
+//right option
+let k = 0
+let options = document.querySelectorAll('.option')
+
+for (let i = 0; i < options.length; i++) {
+    let option = options[i]
+    option.addEventListener("click", function() {
+        k = i
+        getlengthSongOption()
+        stopAudioOption()
+        document.querySelector('.option-img').style.backgroundImage = `url(${birdsData[actualTopic][i].image})`;
+        document.querySelector('.option-title-lat').textContent = birdsData[actualTopic][i].species;
+
+        let birdsD = langSelect === 'en' ? birdsDataEn : birdsData;
+        document.querySelector('.option-title').textContent = birdsD[actualTopic][i].name;
+        document.querySelector('.option-description').textContent = birdsD[actualTopic][i].description;
+        if (i == rightOption) {
+            nextLevel.classList.add('next-level-active')
+            nextLevel.disabled = false;
+            document.querySelector('.correct-img').style.backgroundImage = `url(${birdsData[actualTopic][rightOption].image})`;
+            let birdsD = langSelect === 'en' ? birdsDataEn : birdsData;
+            document.querySelector('.correct-title').textContent = birdsD[actualTopic][rightOption].name;
+        }
+    })
+}
+
+//score
+
+let ArrBird = [];
+for (let i = 0; i < options.length; i++) {
+    let option = options[i];
+    let optionBtn = optionBtns[i]
+    let optionV = optionVar[i]
+    option.addEventListener("click", function makeScore(event) {
+        if (changeStyle) {
+            if (!ArrBird.includes(optionV.textContent)) {
+                scoreLevel--;
+                ArrBird.push(optionV.textContent)
+            }
+            playAudioSound(1)
+            optionBtn.classList.add('option-btn-no')
+            if (i == rightOption) {
+                optionBtn.classList.add('option-btn-yes')
+                scoreCount = scoreLevel + scoreCount;
+                scoreLevel = 7;
+                ArrBird = []
+                playAudioSound(0);
+                changeStyle = false;
+                audio.pause();
+                isPlay = false;
+                play.classList.remove('pause');
+            }
+            if (i == rightOption && actualTopic === 5) {
+                playAudioSound(3)
+                score.classList.remove('score-start');
+                game.classList.remove('game-start');
+                document.querySelector('.final-hidden').classList.add('final');
+                let t = `Ваше колличество баллов: ${scoreCount} `
+                document.querySelector('.final-text').textContent = t;
+
+                if (scoreCount == 36) {
+                    playAudioSound(2)
+                    tryAgain.classList.add('try-again-hidden');
+                    let t = `Вы набрали максимальное колличество баллов`
+                    document.querySelector('.final-text').textContent = t;
+                }
+            }
+        }
+    })
+}
+
+//gallery player
+
+const audioGalery = new Audio();
+const playGalery = document.querySelector('.play-gallery');
+const currentGalery = document.querySelector('.current-gallery');
+const lengthSongGalery = document.querySelector('.length-song-gallery');
+const prev = document.querySelector('.gallery-prev')
+const next = document.querySelector('.gallery-next')
+let galleryTopic = 0;
+let galleryNum = 0
+
+let isPlayGalery = false;
+
+function getlengthSongGalery() {
+    audioGalery.src = birdsData[galleryTopic][galleryNum].audio;
+    audioGalery.addEventListener('canplay', () => {
+        lengthSongGalery.textContent = getTimeCodeFromNum(audioGalery.duration);
+    })
+}
+
+function playAudioGalery() {
+    let currentSong = audioGalery.currentTime;
+    audioGalery.src = birdsData[galleryTopic][galleryNum].audio;
+    if (!isPlayGalery) {
+        audioGalery.currentTime = currentSong;
+        audioGalery.play();
+        isPlayGalery = true;
+    } else {
+        audioGalery.currentTime = currentSong;
+        audioGalery.pause();
+        isPlayGalery = false;
+    }
+    audioGalery.addEventListener('ended', function() {
+        stopAudioGalery();
+        currentSong = audioGalery.currentTime;
+    });
+}
+
+function stopAudioGalery() {
+    playGalery.classList.remove('pause-gallery');
+    audioGalery.pause();
+    isPlayGalery = false;
+    audioGalery.currentTime = 0
+}
+
+function pauseAudioGalery() {
+    playGalery.classList.toggle('pause-gallery');
+}
+
+playGalery.addEventListener('click', function(p) {
+    playAudioGalery(k)
+    pauseAudioGalery();
+
+})
+
+//timeline
+const timelineGalery = document.querySelector(".timeline-gallery");
+const thumbGalery = document.querySelector('.thumb-gallery');
+const progressBarGalery = document.querySelector(".progress-gallery");
+
+thumbGalery.onmousedown = function(event) {
+    event.preventDefault();
+    let shiftX = event.clientX - thumbGalery.getBoundingClientRect().left;
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+
+    function onMouseMove(event) {
+        let newLeft = event.clientX - shiftX - timelineGalery.getBoundingClientRect().left;
+        if (newLeft < 0) {
+            newLeft = 0;
+        }
+        let rightEdge = timelineGalery.offsetWidth;
+        if (newLeft > rightEdge) {
+            newLeft = rightEdge;
+        }
+        thumbGalery.style.left = newLeft + 'px';
+        progressBarGalery.style.width = newLeft / parseInt(timelineGalery.offsetWidth) * 100 + "%";
+        audioGalery.currentTime = audioGalery.duration * (newLeft / parseInt(timelineGalery.offsetWidth))
+        current.textContent = getTimeCodeFromNum(audioGalery.currentTime);
+    }
+
+    function onMouseUp() {
+        // setTimeout(() => {
+        document.removeEventListener('mouseup', onMouseUp);
+        document.removeEventListener('mousemove', onMouseMove);
+        // }, 0)
+        current.textContent = getTimeCodeFromNum(audioGalery.currentTime);
+    }
+    audioGalery.addEventListener('ended', function() {
+        audioGalery.currentTime = 0
+        progressBarGalery.style.width = 0 + "%";
+        thumbGalery.style.left = 0 + 'px';
+        currentGalery.textContent = getTimeCodeFromNum(audioGalery.currentTime);
+        playGalery.classList.remove('pause');
+    });
+
+
+};
+
+thumbGalery.ondragstart = function() {
+    return false;
+};
+
+setInterval(() => {
+    currentGalery.textContent = getTimeCodeFromNum(audioGalery.currentTime);
+    let newLeft = (audioGalery.currentTime * parseInt(timelineGalery.offsetWidth)) / audioGalery.duration
+    if (newLeft < 0) {
+        newLeft = 0;
+    }
+    let rightEdge = timelineGalery.offsetWidth;
+    if (newLeft > rightEdge) {
+        newLeft = rightEdge;
+    }
+    thumbGalery.style.left = newLeft + 'px';
+    progressBarGalery.style.width = newLeft / parseInt(timelineGalery.offsetWidth) * 100 + "%";
+}, 20);
+
+//volume
+document.querySelector(".volume-percentage-gallery").style.width = '75%';
+const volumeSliderGalery = document.querySelector(".volume-slider-gallery");
+volumeSliderGalery.addEventListener('click', e => {
+    const sliderWidth = window.getComputedStyle(volumeSliderGalery).width;
+    const newVolume = e.offsetX / parseInt(sliderWidth);
+    audioGalery.volume = newVolume;
+    document.querySelector(".volume-percentage-gallery").style.width = newVolume * 100 + '%';
+})
+
+document.querySelector(".volume-button-gallery").addEventListener("click", () => {
+    const volumeElGalery = document.querySelector(".volume-button-gallery");
+    audioGalery.muted = !audioGalery.muted;
+    if (audioGalery.muted) {
+        volumeElGalery.style.opacity = 0.4;
+    } else {
+        volumeElGalery.style.opacity = 1;
+    }
+});
+
+//gallery
+
+gallery.addEventListener('click', makeGallery)
+
+function makeGallery() {
+    quotes.classList.add('quotes-hidden');
+    document.querySelector('.gallery').classList.remove('gallery-hidden');
+    chooseLang.classList.add('choose-lang-hidden');
+    birdGalery.classList.add('bird-gallery-hidden');
+    getlengthSongGalery()
+    stopAudioGalery()
+    document.querySelector('.gallery-img').style.backgroundImage = `url(${birdsData[galleryTopic][galleryNum].image})`;
+    document.querySelector('.gallery-title-lat').textContent = birdsData[galleryTopic][galleryNum].species;
+
+    let birdsD = langSelect === 'en' ? birdsDataEn : birdsData;
+    document.querySelector('.gallery-title').textContent = birdsD[galleryTopic][galleryNum].name;
+    document.querySelector('.gallery-description').textContent = birdsD[galleryTopic][galleryNum].description;
+}
+next.addEventListener('click', function() {
+    if (galleryNum < 5) {
+        galleryNum++
+    } else {
+        galleryNum = 0;
+        if (galleryTopic < 5) {
+            galleryTopic++
+        } else {
+            galleryTopic = 0
+        }
+    }
+
+    makeGallery()
+})
+prev.addEventListener('click', function() {
+    if (galleryNum > 0) {
+        galleryNum--
+    } else {
+        galleryNum = 5;
+        if (galleryTopic > 0) {
+            galleryTopic--
+        } else {
+            galleryTopic = 5
+        }
+    }
+
+    makeGallery()
+})
+
+//hellpers
+function getRandomNum(min, max) {
+    let ranNum = Math.floor(Math.random() * (max - min + min)) + 1;
+    return ranNum
+}
