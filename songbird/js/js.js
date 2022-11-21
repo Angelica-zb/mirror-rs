@@ -154,26 +154,47 @@ tryAgain.addEventListener('click', function() {
 
 //next level
 nextLevel.addEventListener('click', function() {
-    nextLevel.classList.remove('next-level-active')
-    nextLevel.disabled = true;
     actualTopic++;
-    rightOption = getRandomNum(0, 5)
-    getlengthSong()
-    getlengthSongOption
-    getOption()
-    document.querySelector('.about-option-start').classList.remove('about-option-start-hidden')
-    document.querySelector('.about-option').classList.add('about-option-hidden')
-    makeTopic()
-    document.querySelector('.correct-title').textContent = '******';
-    document.querySelector('.correct-img').style.backgroundImage = 'url(./assets/img/bird.06a46938.jpg)';
-    play.classList.remove('pause');
-    isPlay = false;
-    stopAudioOption();
-    for (let i = 0; i < optionBtns.length; i++) {
-        optionBtns[i].classList.remove('option-btn-no')
-        optionBtns[i].classList.remove('option-btn-yes')
+    console.log(actualTopic)
+    if (actualTopic < 6) {
+        nextLevel.classList.remove('next-level-active')
+        nextLevel.disabled = true;
+        rightOption = getRandomNum(0, 5)
+        getlengthSong()
+        getlengthSongOption
+        getOption()
+        document.querySelector('.about-option-start').classList.remove('about-option-start-hidden')
+        document.querySelector('.about-option').classList.add('about-option-hidden')
+        makeTopic()
+        document.querySelector('.correct-title').textContent = '******';
+        document.querySelector('.correct-img').style.backgroundImage = 'url(./assets/img/bird.06a46938.jpg)';
+        play.classList.remove('pause');
+        isPlay = false;
+        stopAudioOption();
+        for (let i = 0; i < optionBtns.length; i++) {
+            optionBtns[i].classList.remove('option-btn-no')
+            optionBtns[i].classList.remove('option-btn-yes')
+        }
+        changeStyle = true;
     }
-    changeStyle = true;
+    setTimeout(() => {
+        if (actualTopic === 6) {
+            playAudioSound(3)
+            score.classList.remove('score-start');
+            game.classList.remove('game-start');
+            document.querySelector('.final-hidden').classList.add('final');
+            let t = `Вы прошли викторину и набрали: ${scoreCount} из 30 возможных баллов`
+            document.querySelector('.final-text').textContent = t;
+
+            if (scoreCount == 30) {
+                playAudioSound(2)
+                tryAgain.classList.add('try-again-hidden');
+                let t = `Вы набрали максимальное колличество баллов`
+                document.querySelector('.final-text').textContent = t;
+            }
+        }
+    }, 20)
+
 })
 
 //topic
@@ -568,21 +589,7 @@ for (let i = 0; i < options.length; i++) {
                 let scoreRes = langSelect === 'en' ? `Score: ${scoreCount}` : `Счет: ${scoreCount}`;
                 score.textContent = scoreRes
             }
-            if (i === rightOption && actualTopic === 5) {
-                playAudioSound(3)
-                score.classList.remove('score-start');
-                game.classList.remove('game-start');
-                document.querySelector('.final-hidden').classList.add('final');
-                let t = `Ваше колличество баллов: ${scoreCount} `
-                document.querySelector('.final-text').textContent = t;
 
-                if (scoreCount == 30) {
-                    playAudioSound(2)
-                    tryAgain.classList.add('try-again-hidden');
-                    let t = `Вы набрали максимальное колличество баллов`
-                    document.querySelector('.final-text').textContent = t;
-                }
-            }
         }
     })
 }
