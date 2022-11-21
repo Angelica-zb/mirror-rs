@@ -152,16 +152,14 @@ tryAgain.addEventListener('click', function() {
     nextLevel.disabled = true;
 })
 
-
 //next level
-
 nextLevel.addEventListener('click', function() {
     nextLevel.classList.remove('next-level-active')
     nextLevel.disabled = true;
     actualTopic++;
     rightOption = getRandomNum(0, 5)
     getlengthSong()
-    getlengthSongOption()
+    getlengthSongOption
     getOption()
     document.querySelector('.about-option-start').classList.remove('about-option-start-hidden')
     document.querySelector('.about-option').classList.add('about-option-hidden')
@@ -195,9 +193,7 @@ function makeTopic() {
 const play = document.querySelector('.play');
 const current = document.querySelector('.current');
 const lengthSong = document.querySelector('.length-song');
-
 let isPlay = false;
-
 const audio = new Audio();
 
 function getlengthSong() {
@@ -236,8 +232,6 @@ play.addEventListener('click', function(p) {
     playAudio()
     pauseAudio();
 })
-
-
 
 //timeline
 const timeline = document.querySelector(".timeline");
@@ -279,8 +273,6 @@ thumb.onmousedown = function(event) {
         current.textContent = getTimeCodeFromNum(audio.currentTime);
         play.classList.remove('pause');
     });
-
-
 };
 
 // timeline.addEventListener("mousedown", event => {
@@ -367,14 +359,11 @@ answerOptions.addEventListener("click", () => {
     document.querySelector('.about-option').classList.remove('about-option-hidden')
 })
 
-
-
 //------------------player-variants
 const audioOption = new Audio();
 const playOption = document.querySelector('.play-option');
 const currentOption = document.querySelector('.current-option');
 const lengthSongOption = document.querySelector('.length-song-option');
-
 let isPlayOption = false;
 
 function getlengthSongOption() {
@@ -462,8 +451,6 @@ thumbOption.onmousedown = function(event) {
         currentOption.textContent = getTimeCodeFromNum(audioOption.currentTime);
         playOption.classList.remove('pause');
     });
-
-
 };
 
 thumbOption.ondragstart = function() {
@@ -523,6 +510,7 @@ const audioSound = new Audio();
 
 function playAudioSound(sound) {
     if (isPlaySound) {
+        audioSound.pause();
         audioSound.src = sounds[sound].src;
         audioSound.play();
     }
@@ -556,13 +544,12 @@ for (let i = 0; i < options.length; i++) {
 }
 
 //score
-
 let ArrBird = [];
 for (let i = 0; i < options.length; i++) {
     let option = options[i];
     let optionBtn = optionBtns[i]
     let optionV = optionVar[i]
-    option.addEventListener("click", function makeScore(event) {
+    option.addEventListener("click", function makeScore() {
         if (changeStyle) {
             if (!ArrBird.includes(optionV.textContent)) {
                 scoreLevel--;
@@ -570,18 +557,18 @@ for (let i = 0; i < options.length; i++) {
             }
             playAudioSound(1)
             optionBtn.classList.add('option-btn-no')
-            if (i == rightOption) {
+            if (i === rightOption) {
+                playAudioSound(0);
                 optionBtn.classList.add('option-btn-yes')
                 scoreCount = scoreLevel + scoreCount;
                 scoreLevel = 7;
                 ArrBird = []
-                playAudioSound(0);
                 changeStyle = false;
                 audio.pause();
                 isPlay = false;
                 play.classList.remove('pause');
             }
-            if (i == rightOption && actualTopic === 5) {
+            if (i === rightOption && actualTopic === 5) {
                 playAudioSound(3)
                 score.classList.remove('score-start');
                 game.classList.remove('game-start');
@@ -601,7 +588,6 @@ for (let i = 0; i < options.length; i++) {
 }
 
 //gallery player
-
 const audioGalery = new Audio();
 const playGalery = document.querySelector('.play-gallery');
 const currentGalery = document.querySelector('.current-gallery');
@@ -610,7 +596,6 @@ const prev = document.querySelector('.gallery-prev')
 const next = document.querySelector('.gallery-next')
 let galleryTopic = 0;
 let galleryNum = 0
-
 let isPlayGalery = false;
 
 function getlengthSongGalery() {
@@ -652,7 +637,6 @@ function pauseAudioGalery() {
 playGalery.addEventListener('click', function(p) {
     playAudioGalery(k)
     pauseAudioGalery();
-
 })
 
 //timeline
@@ -695,8 +679,6 @@ thumbGalery.onmousedown = function(event) {
         currentGalery.textContent = getTimeCodeFromNum(audioGalery.currentTime);
         playGalery.classList.remove('pause');
     });
-
-
 };
 
 thumbGalery.ondragstart = function() {
@@ -766,7 +748,6 @@ next.addEventListener('click', function() {
             galleryTopic = 0
         }
     }
-
     makeGallery()
 })
 prev.addEventListener('click', function() {
@@ -780,7 +761,6 @@ prev.addEventListener('click', function() {
             galleryTopic = 5
         }
     }
-
     makeGallery()
 })
 
