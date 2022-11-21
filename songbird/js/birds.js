@@ -69,7 +69,7 @@ export const birdsData = [
             name: 'Галка',
             species: 'Coloeus monedula',
             description: 'Слово «галка» произошло из старославянского языка и переводится как «чёрный». Этим словом часто называют воронов или других черных птиц. Латинское название галки «monedula» связывают со словами монета за любовь птицы к блестящим и ярким вещам.',
-            image: 'https://live.staticflickr.com//65535//49237149586_993cf685c5.jpg',
+            image: 'https://ptici.info/assets/components/phpthumbof/cache/galka.18176db1094c57fa245ab89941e7a0fb.jpg',
             audio: 'https://www.xeno-canto.org/sounds/uploaded/GYAUIPUVNM/XC510498-Coloeus%20monedula_2019.11.13_11.55_01.mp3'
         },
         {
