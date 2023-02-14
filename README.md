@@ -1,2 +1,1 @@
-# angelica-zb-JSFE2022Q3
-Private repository for @angelica-zb
+https://rolling-scopes-school.github.io/angelica-zb-JSFE2022Q3/songbird/ 
